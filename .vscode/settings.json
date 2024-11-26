@@ -1,8 +1,10 @@
 {
+  "conventionalCommits.scopes": ["api", "ui", "experience", "infra", "config", "release"],
     "cSpell.words": [
-        "godotenv",
-        "goroutines",
-        "healthz",
-        "johnsilver"
+      "commitlint",
+      "godotenv",
+      "goroutines",
+      "healthz",
+      "johnsilver"
     ]
 }

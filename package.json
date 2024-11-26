@@ -1,0 +1,18 @@
+{
+  "name": "go-api",
+  "version": "0.0.1",
+  "description": "A simple go API",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "husky"
+  },
+  "author": "Ion Crete <cretuion94@gmail.com>",
+  "repository": "https://github.com/johnsilver94/go-api.git",
+  "license": "ISC",
+  "packageManager": "pnpm@9.14.2",
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
+    "husky": "^9.1.7"
+  }
+}
