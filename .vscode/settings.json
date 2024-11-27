@@ -5,6 +5,7 @@
       "godotenv",
       "goroutines",
       "healthz",
-      "johnsilver"
+      "johnsilver",
+      "subrouter"
     ]
 }

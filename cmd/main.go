@@ -1,7 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"database/sql"
+	"fmt"
+	"log"
+
+	"github.com/johnsilver94/go-api/cmd/api"
+	configs "github.com/johnsilver94/go-api/cmd/config"
+	"github.com/johnsilver94/go-api/cmd/db"
+
+	_ "github.com/lib/pq"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	db, err := db.NewPostgresStorage(configs.Envs.DbUrl)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	initStorage(db)
+
+	server := api.NewApiServer(fmt.Sprintf(":%s", configs.Envs.Port), nil)
+
+	if err := server.Start(); err != nil {
+		log.Fatal(err)
+	}
+}
+
+func initStorage(db *sql.DB) {
+	err := db.Ping()
+	if err != nil {
+		log.Fatal(err)
+
+	}
+
+	log.Println("Connected to database")
 }
