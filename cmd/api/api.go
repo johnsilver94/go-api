@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/johnsilver94/go-api/services/todo"
 	"github.com/johnsilver94/go-api/services/user"
 )
 
@@ -24,9 +25,12 @@ func (s *APIServer) Start() error {
 	subrouter := router.PathPrefix("/api/v1").Subrouter()
 
 	userStore := user.NewStore(s.db)
-
 	userHandler := user.NewHandler(userStore)
 	userHandler.RegisterRoutes(subrouter)
+
+	todoStore := todo.NewStore(s.db)
+	todoHandler := todo.NewHandler(todoStore, userStore)
+	todoHandler.RegisterRoutes(subrouter)
 
 	log.Println("Starting server on", s.addr)
 

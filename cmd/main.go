@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/johnsilver94/go-api/cmd/api"
-	configs "github.com/johnsilver94/go-api/config"
+	"github.com/johnsilver94/go-api/configs"
 	"github.com/johnsilver94/go-api/db"
 
 	_ "github.com/lib/pq"
@@ -20,7 +20,7 @@ func main() {
 
 	initStorage(db)
 
-	server := api.NewApiServer(fmt.Sprintf(":%s", configs.Envs.Port), nil)
+	server := api.NewApiServer(fmt.Sprintf(":%s", configs.Envs.Port), db)
 
 	if err := server.Start(); err != nil {
 		log.Fatal(err)

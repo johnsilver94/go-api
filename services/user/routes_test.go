@@ -7,7 +7,6 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/google/uuid"
 	"github.com/gorilla/mux"
 	"github.com/johnsilver94/go-api/types"
 )
@@ -76,7 +75,7 @@ func (m *mockUserStore) GetUserByEmail(email string) (*types.User, error) {
 	return &types.User{}, nil
 }
 
-func (m *mockUserStore) GetUserByID(id uuid.UUID) (*types.User, error) {
+func (m *mockUserStore) GetUserByID(id string) (*types.User, error) {
 	return &types.User{}, nil
 }
 

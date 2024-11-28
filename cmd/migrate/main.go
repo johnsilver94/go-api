@@ -8,7 +8,7 @@ import (
 	pgMigrate "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
 
-	configs "github.com/johnsilver94/go-api/config"
+	"github.com/johnsilver94/go-api/configs"
 	"github.com/johnsilver94/go-api/db"
 )
 
