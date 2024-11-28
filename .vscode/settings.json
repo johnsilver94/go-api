@@ -7,5 +7,6 @@
       "healthz",
       "johnsilver",
       "subrouter"
-    ]
+    ],
+    "makefile.configureOnOpen": false
 }

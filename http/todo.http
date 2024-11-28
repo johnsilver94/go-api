@@ -19,10 +19,14 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHBpcmVzQXQiOjE3MzI5NzA5
 Content-Type: application/json
 
 {
-    "title": "First todo",
-    "description": "First todo description",
+    "title": "Second todo",
+    "description": "Second todo description",
     "user_id": "de1acac1-01b7-4025-b034-ff57cc3a7b84"
 }
 
 ### Get todo list
 GET {{baseUrl}}/todos HTTP/1.1
+
+### Get todo list
+@todoId = eab4051f-711b-4e1b-9092-b616e3629ace
+GET {{baseUrl}}/todos/{{todoId}} HTTP/1.1

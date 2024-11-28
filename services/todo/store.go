@@ -31,7 +31,7 @@ func (s *Store) GetTodos() ([]*types.Todo, error) {
 
 	todos := make([]*types.Todo, 0)
 	for rows.Next() {
-		p, err := scanRowsIntoProduct(rows)
+		p, err := scanRowsIntoTodo(rows)
 		if err != nil {
 			return nil, err
 		}
@@ -43,14 +43,14 @@ func (s *Store) GetTodos() ([]*types.Todo, error) {
 }
 
 func (s *Store) GetTodoByID(todoID string) (*types.Todo, error) {
-	rows, err := s.db.Query("SELECT * FROM products WHERE id = %1", todoID)
+	rows, err := s.db.Query("SELECT * FROM todos WHERE id = $1", todoID)
 	if err != nil {
 		return nil, err
 	}
 
 	p := new(types.Todo)
 	for rows.Next() {
-		p, err = scanRowsIntoProduct(rows)
+		p, err = scanRowsIntoTodo(rows)
 		if err != nil {
 			return nil, err
 		}
@@ -59,7 +59,7 @@ func (s *Store) GetTodoByID(todoID string) (*types.Todo, error) {
 	return p, nil
 }
 
-func scanRowsIntoProduct(rows *sql.Rows) (*types.Todo, error) {
+func scanRowsIntoTodo(rows *sql.Rows) (*types.Todo, error) {
 	product := new(types.Todo)
 
 	err := rows.Scan(

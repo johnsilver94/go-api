@@ -30,6 +30,23 @@ cd go-api
 go mod tidy
 ```
 
+## Folder Structure
+
+- `.editorconfig`: Configuration file for maintaining consistent coding styles.
+- `.env`: Environment variables file.
+- `.env.example`: Example environment variables file.
+- `.gitignore`: Specifies files and directories to be ignored by Git.
+- `.husky/`: Configuration for Husky, which manages Git hooks.
+- `.vscode/`: Visual Studio Code workspace settings.
+- `bin/`: Compiled binary files.
+- `cmd/`: Entry points for the application.
+  - `api/`: Main API server entry point.
+  - `migrate/`: Database migration scripts.
+- `configs/`: Configuration files.
+- `db/`: Database connection and initialization.
+- `http/`: HTTP request files for testing endpoints.
+- `Makefile`: Makefile for build automation.
+
 ## Configuration
 
 1. Copy the example configuration file and update it with your settings:
@@ -45,10 +62,30 @@ cp .env.example .env
 1. Start the application:
 
 ```sh
-go run main.go
+make run
 ```
 
-2. The API will be available at `http://localhost:8080`.
+2. The API will be available at `http://localhost:{PORT}`.
+
+## Database Migrations
+
+1. Create a new migration:
+
+```sh
+make migration <migration_name>
+```
+
+2. Apply all migrations:
+
+```sh
+make migration-up
+```
+
+3. Rollback the last migration:
+
+```sh
+make migration-down
+```
 
 ## Testing
 

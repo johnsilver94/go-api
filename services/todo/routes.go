@@ -23,10 +23,8 @@ func NewHandler(store types.TodoStore, userStore types.UserStore) *Handler {
 }
 
 func (h *Handler) RegisterRoutes(router *mux.Router) {
-	router.HandleFunc("/todos", h.handleGetProducts).Methods(http.MethodGet)
-	// router.HandleFunc("/todos/{todoID}", h.handleGetProduct).Methods(http.MethodGet)
-
-	// admin routes
+	router.HandleFunc("/todos", h.handleGetTodos).Methods(http.MethodGet)
+	router.HandleFunc("/todos/{todoID}", h.handleGetTodo).Methods(http.MethodGet)
 	router.HandleFunc("/todos", auth.WithJWTAuth(h.handleCreateTodo, h.userStore)).Methods(http.MethodPost)
 }
 
@@ -60,7 +58,7 @@ func (h *Handler) handleCreateTodo(w http.ResponseWriter, r *http.Request) {
 	utils.WriteJson(w, http.StatusCreated, nil)
 }
 
-func (h *Handler) handleGetProducts(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) handleGetTodos(w http.ResponseWriter, r *http.Request) {
 	todos, err := h.store.GetTodos()
 	if err != nil {
 		utils.WriteError(w, http.StatusInternalServerError, err)
@@ -68,4 +66,21 @@ func (h *Handler) handleGetProducts(w http.ResponseWriter, r *http.Request) {
 	}
 
 	utils.WriteJson(w, http.StatusOK, todos)
+}
+
+func (h *Handler) handleGetTodo(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	todoID, ok := vars["todoID"]
+	if !ok {
+		utils.WriteError(w, http.StatusBadRequest, fmt.Errorf("missing todo ID"))
+		return
+	}
+
+	todo, err := h.store.GetTodoByID(todoID)
+	if err != nil {
+		utils.WriteError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	utils.WriteJson(w, http.StatusOK, todo)
 }
