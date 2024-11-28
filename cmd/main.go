@@ -6,8 +6,8 @@ import (
 	"log"
 
 	"github.com/johnsilver94/go-api/cmd/api"
-	configs "github.com/johnsilver94/go-api/cmd/config"
-	"github.com/johnsilver94/go-api/cmd/db"
+	configs "github.com/johnsilver94/go-api/config"
+	"github.com/johnsilver94/go-api/db"
 
 	_ "github.com/lib/pq"
 )
